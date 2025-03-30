@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "johnsoncodehk.volarjs-labs",
+    "wayou.vscode-todo-highlight",
+    "stylelint.vscode-stylelint"
+  ],
+  "unwantedRecommendations": [
+    "vue.volar",
+    "octref.vetur",
+    "hookyqr.beautify",
+    "dbaeumer.jshint",
+    "ms-vscode.vscode-typescript-tslint-plugin"
+  ]
+}
