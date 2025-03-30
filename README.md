@@ -41,3 +41,17 @@ npm run build
 ### Customize the configuration
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+
+### Changelog
+
+- add quasar
+- add eslint rules
+- add config prettier+eslint
+- add project format script
+- linting project files
+- add stylelint extends
+- set tag script before tag setup in vue files
+- fix scripts
+- add SERVER to namespace NodeJS
+- env | upgrade dependencies
+- update readme
