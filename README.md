@@ -55,3 +55,4 @@ See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-
 - add SERVER to namespace NodeJS
 - env | upgrade dependencies
 - update readme
+- build(deps): update package.json and yarn.lock
