@@ -6,7 +6,6 @@ import type {
   Todo, Meta,
 } from 'components/models'
 
-
 const todos = ref<Todo[]>([
   {
     id: 1,

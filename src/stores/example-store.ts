@@ -1,7 +1,6 @@
 import {
-  defineStore, acceptHMRUpdate, 
+  defineStore, acceptHMRUpdate,
 } from 'pinia'
-
 
 export const useCounterStore = defineStore('counter', {
   state: () => ({

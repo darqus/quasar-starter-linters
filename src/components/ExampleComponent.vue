@@ -7,7 +7,6 @@ import type {
   Todo, Meta,
 } from './models'
 
-
 type Props = {
   title: string
   todos?: Todo[]
