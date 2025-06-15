@@ -12,7 +12,6 @@ import globals from 'globals'
 
 import { rules, } from './.config/eslint-rules/index.js'
 
-
 export default defineConfigWithVueTs(
   {
     ignores: [
