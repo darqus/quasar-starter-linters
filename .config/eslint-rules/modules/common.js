@@ -1,15 +1,6 @@
 export const common = {
   semi: [ 'error', 'never', ],
-
   'no-extra-semi': 'error',
-
-  'import/newline-after-import': [
-    'error',
-    {
-      count: 2,
-    },
-  ],
-
   'import/order': [
     'error',
     {
@@ -18,9 +9,10 @@ export const common = {
         'builtin',
         'external',
         'internal',
-        [ 'sibling', 'parent', ],
+        [ 'parent', 'sibling', ],
         'index',
-        'unknown',
+        'type',
+        'object',
       ],
       pathGroups: [
         {
@@ -65,58 +57,62 @@ export const common = {
         },
         {
           pattern: '**/types/**',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
           pattern: '**/routes/**',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
           pattern: 'api',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
           pattern: '**/services/api/**',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
           pattern: '**/stores/**',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
           pattern: '**/utils/**',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
           pattern: 'module',
-          group: 'external',
-          position: 'before',
-        },
-        {
-          pattern: '**/components/common/**',
-          group: 'external',
-          position: 'before',
-        },
-        {
-          pattern: 'components',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
           pattern: '**/components/**',
-          group: 'external',
+          group: 'internal',
           position: 'before',
         },
         {
-          pattern: '^[./]',
+          pattern: 'components',
           group: 'internal',
           position: 'before',
+        },
+        {
+          pattern: 'src/**',
+          group: 'internal',
+        },
+        {
+          pattern: './**/*.scss',
+          group: 'index',
+          position: 'after',
+        },
+        {
+          pattern: '../**/*.scss',
+          group: 'parent',
+          position: 'after',
         },
       ],
       pathGroupsExcludedImportTypes: [ 'vue', ],
@@ -129,8 +125,7 @@ export const common = {
     },
   ],
 
-  'import/no-unresolved': 0,
-
+  'import/no-unresolved': [ 'off', ],
   'comma-dangle': [
     'error',
     {
@@ -178,12 +173,9 @@ export const common = {
       allow: [ 'warn', 'error', ],
     },
   ],
-
   'arrow-parens': [ 'error', 'always', ],
   curly: 'error',
-
   'object-shorthand': [ 'error', 'always', ],
-
   'array-bracket-spacing': [ 'error', 'always', ],
 
   // https://eslint.org/docs/latest/rules/object-curly-spacing
@@ -218,10 +210,8 @@ export const common = {
       },
     },
   ],
-
   eqeqeq: [ 'error', 'smart', ],
-  'prefer-promise-reject-errors': 'off',
-
+  'prefer-promise-reject-errors': 'error',
   quotes: [
     'error',
     'single',
@@ -230,17 +220,11 @@ export const common = {
       allowTemplateLiterals: false,
     },
   ],
-
   'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-
   'no-useless-constructor': 'off',
-
   'no-shadow': 'off',
-
   'no-var': [ 'error', ],
-
   'lines-between-class-members': [ 'error', 'always', ],
-
   'padding-line-between-statements': [
     'error',
     {
@@ -267,6 +251,29 @@ export const common = {
       blankLine: 'any',
       prev: 'directive',
       next: 'directive',
+    },
+  ],
+  'no-multiple-empty-lines': [
+    'error',
+    {
+      max: 1,
+      maxEOF: 0,
+      maxBOF: 0,
+    },
+  ],
+  'lines-around-comment': [
+    'error',
+    {
+      beforeBlockComment: true,
+      afterBlockComment: false,
+      beforeLineComment: true,
+      afterLineComment: false,
+      allowBlockStart: true,
+      allowBlockEnd: false,
+      allowObjectStart: true,
+      allowObjectEnd: false,
+      allowArrayStart: true,
+      allowArrayEnd: false,
     },
   ],
 }

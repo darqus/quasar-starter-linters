@@ -8,7 +8,6 @@ export const vue = {
       autofix: true,
     },
   ],
-
   'vue/html-self-closing': [
     'error',
     {
@@ -17,7 +16,6 @@ export const vue = {
       },
     },
   ],
-
   'vue/component-name-in-template-casing': [
     'error',
     'PascalCase',
@@ -26,7 +24,6 @@ export const vue = {
       ignores: [],
     },
   ],
-
   'vue/attributes-order': [
     'error',
     {
@@ -105,5 +102,12 @@ export const vue = {
       ],
     },
   ],
-  'vue/this-in-template': [ 'error', 'never', ],
+  'vue/block-tag-newline': [
+    'error',
+    {
+      singleline: 'consistent',
+      multiline: 'consistent',
+      maxEmptyLines: 0,
+    },
+  ],
 }
