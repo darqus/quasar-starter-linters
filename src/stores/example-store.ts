@@ -1,21 +1,32 @@
 import {
+  computed, ref,
+} from 'vue'
+
+import {
   defineStore, acceptHMRUpdate,
+  createPinia,
 } from 'pinia'
 
-export const useCounterStore = defineStore('counter', {
-  state: () => ({
-    counter: 0,
-  }),
+export const pinia = createPinia()
 
-  getters: {
-    doubleCount: (state) => state.counter * 2,
-  },
+// Example store using Composition API
+export const useCounterStore = defineStore('counter', () => {
+  // state
+  const count = ref(0)
 
-  actions: {
-    increment() {
-      this.counter++
-    },
-  },
+  // getters
+  const doubleCount = computed(() => count.value * 2)
+
+  // actions
+  const increment = () => {
+    count.value++
+  }
+
+  return {
+    count,
+    doubleCount,
+    increment,
+  }
 })
 
 if (import.meta.hot) {
