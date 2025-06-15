@@ -3,7 +3,6 @@
 
 import { defineConfig, } from '#q-app/wrappers'
 
-
 export default defineConfig((/* ctx */) => ({
   // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
   // preFetch: true,
@@ -31,10 +30,11 @@ export default defineConfig((/* ctx */) => ({
     typescript: {
       strict: true,
       vueShim: true,
+
       // extendTsConfig (tsConfig) {}
     },
 
-    vueRouterMode: 'hash', // available values: 'hash', 'history'
+    vueRouterMode: 'history', // available values: 'hash', 'history'
     // vueRouterBase,
     // vueDevtools,
     // vueOptionsAPI: false,
@@ -130,6 +130,7 @@ export default defineConfig((/* ctx */) => ({
     // manualPostHydrationTrigger: true,
 
     pwa: false,
+
     // pwaOfflineHtmlFilename: 'offline.html', // do NOT use index.html as name!
 
     // pwaExtendGenerateSWOptions (cfg) {},
@@ -188,7 +189,7 @@ export default defineConfig((/* ctx */) => ({
     builder: {
       // https://www.electron.build/configuration/configuration
 
-      appId: 'ui-kit',
+      appId: 'quasar-starter-linters',
     },
   },
 
