@@ -101,7 +101,10 @@
     "html",
     "scss"
   ],
+  "npm.packageManager": "yarn",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": []
+  "gitPrefix.replacement": "$1 | ",
+  "cSpell.words": [
+  ]
 }
