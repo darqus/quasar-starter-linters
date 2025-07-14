@@ -5,7 +5,7 @@ import {
   createWebHistory,
 } from 'vue-router'
 
-import { defineRouter, } from '#q-app/wrappers'
+import { defineRouter } from '#q-app/wrappers'
 
 import routes from './routes'
 
@@ -25,10 +25,13 @@ const createHistory = process.env.SERVER
     ? createWebHistory
     : createWebHashHistory
 
-export default defineRouter(() => createRouter({
-  scrollBehavior: () => ({
-    left: 0, top: 0, 
-  }),
-  routes,
-  history: createHistory(process.env.VUE_ROUTER_BASE),
-}))
+export default defineRouter(() =>
+  createRouter({
+    scrollBehavior: () => ({
+      left: 0,
+      top: 0,
+    }),
+    routes,
+    history: createHistory(process.env.VUE_ROUTER_BASE),
+  })
+)

@@ -1,6 +1,6 @@
-import { createPinia, } from 'pinia'
+import { createPinia } from 'pinia'
 
-import { defineStore, } from '#q-app/wrappers'
+import { defineStore } from '#q-app/wrappers'
 
 /*
  * When adding new properties to stores, you should also

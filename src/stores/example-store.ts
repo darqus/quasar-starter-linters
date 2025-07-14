@@ -1,11 +1,6 @@
-import {
-  computed, ref,
-} from 'vue'
+import { computed, ref } from 'vue'
 
-import {
-  defineStore, acceptHMRUpdate,
-  createPinia,
-} from 'pinia'
+import { defineStore, acceptHMRUpdate, createPinia } from 'pinia'
 
 export const pinia = createPinia()
 

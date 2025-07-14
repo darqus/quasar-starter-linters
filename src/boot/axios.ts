@@ -1,9 +1,9 @@
-import { defineBoot, } from '#q-app/wrappers'
+import { defineBoot } from '#q-app/wrappers'
 
-import axios, { type AxiosInstance, } from 'axios'
+import axios, { type AxiosInstance } from 'axios'
 
 declare module 'vue' {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions, @typescript-eslint/naming-convention
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface ComponentCustomProperties {
     $axios: AxiosInstance
     $api: AxiosInstance
@@ -20,9 +20,7 @@ const api = axios.create({
   baseURL: 'https://api.example.com',
 })
 
-export default defineBoot(({
-  app,
-}) => {
+export default defineBoot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api
 
   app.config.globalProperties.$axios = axios
@@ -36,4 +34,4 @@ export default defineBoot(({
   //       so you can easily perform requests against your app's API
 })
 
-export { api, }
+export { api }
