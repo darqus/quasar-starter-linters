@@ -1,5 +1,5 @@
 export const common = {
-  semi: [ 'error', 'never', ],
+  semi: ['error', 'never'],
   'no-extra-semi': 'error',
   'import/order': [
     'error',
@@ -9,7 +9,7 @@ export const common = {
         'builtin',
         'external',
         'internal',
-        [ 'parent', 'sibling', ],
+        ['parent', 'sibling'],
         'index',
         'type',
         'object',
@@ -115,7 +115,7 @@ export const common = {
           position: 'after',
         },
       ],
-      pathGroupsExcludedImportTypes: [ 'vue', ],
+      pathGroupsExcludedImportTypes: ['vue'],
       alphabetize: {
         order: 'asc',
         caseInsensitive: true,
@@ -125,14 +125,14 @@ export const common = {
     },
   ],
 
-  'import/no-unresolved': [ 'off', ],
+  'import/no-unresolved': ['off'],
   'comma-dangle': [
     'error',
     {
-      arrays: 'always',
-      objects: 'always',
-      imports: 'always',
-      exports: 'always',
+      arrays: 'only-multiline',
+      objects: 'only-multiline',
+      imports: 'only-multiline',
+      exports: 'only-multiline',
       functions: 'never',
     },
   ],
@@ -146,39 +146,48 @@ export const common = {
       VariableDeclarator: {
         var: 2,
         let: 2,
-        const: 3,
+        const: 2, // Changed from 3 to 2 for consistency
       },
       MemberExpression: 1,
       FunctionDeclaration: {
         body: 1,
         parameters: 2,
       },
-      StaticBlock: {
-        body: 1,
-      },
-      CallExpression: {
-        arguments: 1,
-      },
+      StaticBlock: { body: 1 },
+      CallExpression: { arguments: 1 },
       ArrayExpression: 1,
       ObjectExpression: 1,
       ImportDeclaration: 1,
       flatTernaryExpressions: true,
       offsetTernaryExpressions: true,
+      ignoredNodes: [
+        'TemplateLiteral',
+        'ConditionalExpression > *',
+        'JSXElement',
+        'JSXElement > *',
+        'JSXAttribute',
+        'JSXIdentifier',
+        'JSXNamespacedName',
+        'JSXMemberExpression',
+        'JSXSpreadAttribute',
+        'JSXExpressionContainer',
+        'JSXOpeningElement',
+        'JSXClosingElement',
+        'JSXText',
+        'JSXEmptyExpression',
+        'JSXSpreadChild',
+      ],
     },
   ],
 
-  'no-console': [
-    'warn',
-    {
-      allow: [ 'warn', 'error', ],
-    },
-  ],
-  'arrow-parens': [ 'error', 'always', ],
+  // FORMATTING RULES - These work together with Prettier
+  'no-console': ['warn', { allow: ['warn', 'error'] }],
+  'arrow-parens': ['error', 'always'], // Matches Prettier config
   curly: 'error',
-  'object-shorthand': [ 'error', 'always', ],
-  'array-bracket-spacing': [ 'error', 'always', ],
+  'object-shorthand': ['error', 'always'],
 
-  // https://eslint.org/docs/latest/rules/object-curly-spacing
+  // SPACING RULES - Carefully configured to work with Prettier
+  'array-bracket-spacing': ['error', 'never'], // Matches Prettier
   'object-curly-spacing': [
     'error',
     'always',
@@ -188,63 +197,93 @@ export const common = {
     },
   ],
 
-  // https://eslint.org/docs/rules/object-curly-newline
+  // NEWLINE RULES - Updated to prevent conflicts
   'object-curly-newline': [
     'error',
     {
       ImportDeclaration: {
         multiline: true,
-        minProperties: 2,
+        minProperties: 6,
+        consistent: true,
       },
       ExportDeclaration: {
         multiline: true,
-        minProperties: 2,
+        minProperties: 6,
+        consistent: true,
       },
       ObjectExpression: {
         multiline: true,
-        minProperties: 1,
+        minProperties: 6,
+        consistent: true,
       },
       ObjectPattern: {
         multiline: true,
-        minProperties: 1,
+        minProperties: 6,
+        consistent: true,
       },
     },
   ],
-  eqeqeq: [ 'error', 'smart', ],
+
+  // QUALITY AND SAFETY RULES
+  eqeqeq: ['error', 'smart'],
   'prefer-promise-reject-errors': 'error',
+  'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+  'no-useless-constructor': 'off', // Disabled for TypeScript compatibility
+  'no-shadow': 'off', // Use @typescript-eslint/no-shadow instead
+  'no-var': ['error'],
+  'prefer-const': ['error', { destructuring: 'all' }],
+  'no-unused-expressions': [
+    'error',
+    { allowShortCircuit: true, allowTernary: true },
+  ],
+  'no-param-reassign': ['error', { props: false }],
+
+  // MODERN JS FEATURES
+  'prefer-destructuring': [
+    'warn',
+    {
+      array: false,
+      object: true,
+    },
+    {
+      enforceForRenamedProperties: false,
+    },
+  ],
+  'prefer-template': 'warn',
+  'template-curly-spacing': ['error', 'never'],
+
+  // QUOTE RULES - Must match Prettier configuration
   quotes: [
     'error',
     'single',
     {
       avoidEscape: true,
-      allowTemplateLiterals: false,
+      allowTemplateLiterals: true, // Allow template literals for consistency
     },
   ],
-  'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-  'no-useless-constructor': 'off',
-  'no-shadow': 'off',
-  'no-var': [ 'error', ],
-  'lines-between-class-members': [ 'error', 'always', ],
+
+  // SPACING AND STRUCTURE RULES
+  'lines-between-class-members': ['error', 'always'],
   'padding-line-between-statements': [
     'error',
     {
       blankLine: 'always',
       prev: '*',
-      next: [ 'return', 'export', 'const', 'let', ],
+      next: ['return', 'export', 'const', 'let'],
     },
     {
       blankLine: 'always',
-      prev: [ 'const', 'let', ],
+      prev: ['const', 'let'],
       next: '*',
     },
     {
       blankLine: 'any',
-      prev: [ 'const', 'let', ],
-      next: [ 'const', 'let', ],
+      prev: ['const', 'let'],
+      next: ['const', 'let'],
     },
     {
       blankLine: 'always',
-      prev: [ 'case', 'default', 'directive', ],
+      prev: ['case', 'default', 'directive'],
       next: '*',
     },
     {
