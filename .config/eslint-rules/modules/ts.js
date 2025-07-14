@@ -4,7 +4,7 @@ export const ts = {
   '@typescript-eslint/no-unsafe-return': 'off',
   '@typescript-eslint/no-unsafe-member-access': 'off',
   '@typescript-eslint/no-unsafe-assignment': 'off',
-  '@typescript-eslint/no-shadow': ['error'],
+  '@typescript-eslint/no-shadow': [ 'error' ],
   '@typescript-eslint/restrict-template-expressions': [
     'warn',
     { allowNumber: true },
@@ -17,7 +17,7 @@ export const ts = {
   ],
 
   // Updated: prefer 'type' over 'interface' for consistency
-  '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+  '@typescript-eslint/consistent-type-definitions': [ 'error', 'type' ],
   '@typescript-eslint/explicit-function-return-type': 'off',
   '@typescript-eslint/no-var-requires': 'off',
   '@typescript-eslint/prefer-nullish-coalescing': 'warn',
@@ -38,16 +38,16 @@ export const ts = {
     'warn',
     {
       selector: 'typeAlias',
-      format: ['PascalCase'],
+      format: [ 'PascalCase' ],
     },
     {
       selector: 'variable',
-      format: ['camelCase', 'PascalCase', 'UPPER_CASE'],
+      format: [ 'camelCase', 'PascalCase', 'UPPER_CASE' ],
       leadingUnderscore: 'allow',
     },
     {
       selector: 'function',
-      format: ['camelCase', 'PascalCase'],
+      format: [ 'camelCase', 'PascalCase' ],
     },
   ],
 

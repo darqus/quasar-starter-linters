@@ -1,5 +1,5 @@
 export const common = {
-  semi: ['error', 'never'],
+  semi: [ 'error', 'never' ],
   'no-extra-semi': 'error',
   'import/order': [
     'error',
@@ -9,7 +9,7 @@ export const common = {
         'builtin',
         'external',
         'internal',
-        ['parent', 'sibling'],
+        [ 'parent', 'sibling' ],
         'index',
         'type',
         'object',
@@ -115,7 +115,7 @@ export const common = {
           position: 'after',
         },
       ],
-      pathGroupsExcludedImportTypes: ['vue'],
+      pathGroupsExcludedImportTypes: [ 'vue' ],
       alphabetize: {
         order: 'asc',
         caseInsensitive: true,
@@ -125,7 +125,7 @@ export const common = {
     },
   ],
 
-  'import/no-unresolved': ['off'],
+  'import/no-unresolved': [ 'off' ],
   'comma-dangle': [
     'error',
     {
@@ -181,13 +181,13 @@ export const common = {
   ],
 
   // FORMATTING RULES - These work together with Prettier
-  'no-console': ['warn', { allow: ['warn', 'error'] }],
-  'arrow-parens': ['error', 'always'], // Matches Prettier config
+  'no-console': [ 'warn', { allow: [ 'warn', 'error' ] } ],
+  'arrow-parens': [ 'error', 'always' ], // Matches Prettier config
   curly: 'error',
-  'object-shorthand': ['error', 'always'],
+  'object-shorthand': [ 'error', 'always' ],
 
   // SPACING RULES - Carefully configured to work with Prettier
-  'array-bracket-spacing': ['error', 'never'], // Matches Prettier
+  'array-bracket-spacing': [ 'error', 'always' ], // Force spaces inside brackets
   'object-curly-spacing': [
     'error',
     'always',
@@ -225,18 +225,18 @@ export const common = {
   ],
 
   // QUALITY AND SAFETY RULES
-  eqeqeq: ['error', 'smart'],
+  eqeqeq: [ 'error', 'smart' ],
   'prefer-promise-reject-errors': 'error',
   'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
   'no-useless-constructor': 'off', // Disabled for TypeScript compatibility
   'no-shadow': 'off', // Use @typescript-eslint/no-shadow instead
-  'no-var': ['error'],
-  'prefer-const': ['error', { destructuring: 'all' }],
+  'no-var': [ 'error' ],
+  'prefer-const': [ 'error', { destructuring: 'all' } ],
   'no-unused-expressions': [
     'error',
     { allowShortCircuit: true, allowTernary: true },
   ],
-  'no-param-reassign': ['error', { props: false }],
+  'no-param-reassign': [ 'error', { props: false } ],
 
   // MODERN JS FEATURES
   'prefer-destructuring': [
@@ -250,7 +250,7 @@ export const common = {
     },
   ],
   'prefer-template': 'warn',
-  'template-curly-spacing': ['error', 'never'],
+  'template-curly-spacing': [ 'error', 'never' ],
 
   // QUOTE RULES - Must match Prettier configuration
   quotes: [
@@ -263,27 +263,27 @@ export const common = {
   ],
 
   // SPACING AND STRUCTURE RULES
-  'lines-between-class-members': ['error', 'always'],
+  'lines-between-class-members': [ 'error', 'always' ],
   'padding-line-between-statements': [
     'error',
     {
       blankLine: 'always',
       prev: '*',
-      next: ['return', 'export', 'const', 'let'],
+      next: [ 'return', 'export', 'const', 'let' ],
     },
     {
       blankLine: 'always',
-      prev: ['const', 'let'],
+      prev: [ 'const', 'let' ],
       next: '*',
     },
     {
       blankLine: 'any',
-      prev: ['const', 'let'],
-      next: ['const', 'let'],
+      prev: [ 'const', 'let' ],
+      next: [ 'const', 'let' ],
     },
     {
       blankLine: 'always',
-      prev: ['case', 'default', 'directive'],
+      prev: [ 'case', 'default', 'directive' ],
       next: '*',
     },
     {

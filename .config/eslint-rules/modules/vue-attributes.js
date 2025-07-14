@@ -23,7 +23,7 @@ export const vueAttributes = {
         'GLOBAL', // 'id'
 
         // 6. UNIQUE/SLOT - Elements that must be unique or define slots
-        ['UNIQUE', 'SLOT'], // 'ref', 'key', 'v-slot', 'slot'
+        [ 'UNIQUE', 'SLOT' ], // 'ref', 'key', 'v-slot', 'slot'
 
         // 7. TWO_WAY_BINDING - Elements that create two-way binding
         'TWO_WAY_BINDING', // 'v-model'
@@ -60,5 +60,5 @@ export const vueAttributes = {
   ],
 
   // PROP NAME CASING (совместимо с strongly-recommended)
-  'vue/prop-name-casing': ['error', 'camelCase'],
+  'vue/prop-name-casing': [ 'error', 'camelCase' ],
 }
