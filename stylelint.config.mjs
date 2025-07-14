@@ -6,7 +6,7 @@ export default {
   ],
   overrides: [
     {
-      files: ['src/*.scss', 'src/**/*.scss'],
+      files: [ 'src/*.scss', 'src/**/*.scss' ],
     },
   ],
   rules: {
