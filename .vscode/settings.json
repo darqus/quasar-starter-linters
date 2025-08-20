@@ -102,7 +102,7 @@
   "eslint.codeActionsOnSave.mode": "problems",
   "scss.validate": false,
   "stylelint.packageManager": "yarn",
-  "stylelint.validate": ["html", "scss"],
+  "stylelint.validate": ["scss"],
   "npm.packageManager": "yarn",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.tsdk": "node_modules/typescript/lib",
