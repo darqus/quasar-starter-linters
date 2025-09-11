@@ -6,7 +6,6 @@ import {
   vueTsConfigs,
 } from '@vue/eslint-config-typescript'
 import pluginImport from 'eslint-plugin-import'
-import pluginPrettier from 'eslint-plugin-prettier'
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
 
@@ -41,10 +40,9 @@ export default defineConfigWithVueTs(
   pluginVue.configs['flat/strongly-recommended'],
 
   {
-    // Register the import and prettier plugins
+    // Register the import plugin
     plugins: {
       import: pluginImport,
-      prettier: pluginPrettier,
     },
   },
 

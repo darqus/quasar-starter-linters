@@ -33,5 +33,5 @@ export default defineRouter(() =>
     }),
     routes,
     history: createHistory(process.env.VUE_ROUTER_BASE),
-  })
+  }),
 )

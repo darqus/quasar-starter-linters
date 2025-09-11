@@ -1,5 +1,11 @@
 export const ts = {
-  '@typescript-eslint/comma-dangle': 'off',
+  '@typescript-eslint/comma-dangle': {
+    arrays: 'only-multiline',
+    objects: 'only-multiline',
+    imports: 'only-multiline',
+    exports: 'only-multiline',
+    functions: 'never',
+  },
   '@typescript-eslint/no-unsafe-call': 'off',
   '@typescript-eslint/no-unsafe-return': 'off',
   '@typescript-eslint/no-unsafe-member-access': 'off',
