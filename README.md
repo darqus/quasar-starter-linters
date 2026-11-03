@@ -156,14 +156,24 @@ Without the Run On Save extension the `npm run lint` gate still applies, and
 read-only token and a concurrency group that cancels superseded runs:
 
 1. `npm ci`
-2. `npm run lint`
-3. `npm run typecheck`
-4. `npm test`
-5. `npm run build`
+2. `npm audit --omit=dev`
+3. `npm run lint`
+4. `npm run typecheck`
+5. `npm test`
+6. `npm run build`
 
 The full sequence runs on Node `22.22.0` (the lower bound), `24` and `26`
 (`fail-fast: false`), so the supported minimum and current LTS lines are
 checked rather than only declared.
+
+## Dependency security
+
+`npm audit --omit=dev` is clean: the production bundle has no known
+vulnerabilities. `npm audit` can still report a **low-severity** `deepmerge`
+advisory pulled in by the dev-only Style Dictionary build. It is disputed
+upstream (VulnCheck rejected CVE-2026-93753) and has no patched release;
+`glob` and `minimatch` are pinned to their patched versions through npm
+`overrides`.
 
 ## Project structure
 
