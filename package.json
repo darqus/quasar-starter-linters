@@ -1,7 +1,7 @@
 {
   "name": "quasar-starter-linters",
   "version": "0.0.1",
-  "description": "Quasar starter linters",
+  "description": "Quasar starter with an opinionated, type-aware linting and styling pipeline",
   "productName": "quasar-starter-linters",
   "author": "darqus",
   "type": "module",
@@ -9,44 +9,49 @@
   "scripts": {
     "dev": "quasar dev",
     "build": "quasar build",
-    "format": "bash format.sh",
-    "postinstall": "quasar prepare"
+    "postinstall": "quasar prepare",
+    "lint": "oxlint --type-aware . && stylelint \"src/**/*.{css,scss,vue}\" && oxfmt --check && node scripts/check-vue-attribute-order.mjs && node scripts/check-no-style-blocks.mjs",
+    "fix": "oxlint --type-aware --fix . && stylelint --fix \"src/**/*.{css,scss,vue}\" && oxfmt && node scripts/check-vue-attribute-order.mjs --fix",
+    "format": "oxfmt",
+    "check:vue-attrs": "node scripts/check-vue-attribute-order.mjs",
+    "fix:vue-attrs": "node scripts/check-vue-attribute-order.mjs --fix",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build:tokens": "node scripts/build-tokens.mjs"
   },
   "dependencies": {
-    "@quasar/extras": "^1.17.0",
-    "axios": "^1.11.0",
-    "pinia": "^3.0.3",
-    "quasar": "^2.18.2",
-    "vue": "^3.5.21",
-    "vue-router": "^4.5.1"
+    "@quasar/extras": "^2.1.0",
+    "@vue/devtools-api": "^8.2.1",
+    "axios": "^1.21.0",
+    "pinia": "^4.1.0",
+    "quasar": "^2.35.2",
+    "vue": "3.5.44",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.35.0",
-    "@quasar/app-vite": "^2.4.0",
-    "@types/node": "^24.3.1",
-    "@vue/eslint-config-prettier": "^10.1.0",
-    "@vue/eslint-config-typescript": "^14.6.0",
-    "autoprefixer": "^10.4.2",
-    "eslint": "^9.35.0",
-    "eslint-plugin-import": "^2.32.0",
-    
-    "eslint-plugin-vue": "^10.4.0",
-    "globals": "^16.4.0",
-    "postcss": "^8.5.6",
-    "prettier": "^3.6.2",
-    "stylelint": "^16.24.0",
-    "stylelint-config-prettier-scss": "^1.0.0",
-    "stylelint-config-recess-order": "^7.3.0",
-    "stylelint-config-recommended-scss": "^16.0.0",
-    "stylelint-order": "^7.0.0",
-    "typescript": "^5.9.2",
-    "vite-plugin-checker": "^0.10.3",
-    "vue-eslint-parser": "^10.2.0",
-    "vue-tsc": "^3.0.6"
+    "@quasar/app-vite": "^3.10.3",
+    "@types/node": "^26.6.6",
+    "@vue/compiler-dom": "^3.5.44",
+    "@vue/compiler-sfc": "^3.5.44",
+    "autoprefixer": "^10.6.2",
+    "oxfmt": "^0.75.0",
+    "oxlint": "^1.90.0",
+    "oxlint-tsgolint": "^7.0.2005",
+    "postcss": "^8.5.32",
+    "postcss-html": "^2.0.0",
+    "postcss-scss": "^4.0.9",
+    "style-dictionary": "^5.7.1",
+    "stylelint": "^17.16.0",
+    "stylelint-config-recess-order": "^7.10.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "typescript": "^5.9.3",
+    "vite-plugin-checker": "^0.14.5",
+    "vitest": "^5.1.0",
+    "vue-tsc": "^3.3.14"
   },
   "engines": {
-    "node": "^28 || ^26 || ^24 || ^22 || ^20 || ^18",
-    "npm": ">= 6.13.4",
-    "yarn": ">= 1.21.1"
+    "node": "^30 || ^28 || ^26 || ^24 || ^22.22.0",
+    "npm": ">= 6.13.4"
   }
 }

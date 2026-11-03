@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 import EssentialLink, {
   type EssentialLinkProps,
-} from 'components/EssentialLink.vue'
+} from '@/components/EssentialLink.vue'
 
 const linksList: EssentialLinkProps[] = [
   {
@@ -70,7 +70,7 @@ const toggleLeftDrawer = () => {
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title> Quasar App </q-toolbar-title>
+        <q-toolbar-title>Quasar App</q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
       </q-toolbar>
@@ -82,7 +82,7 @@ const toggleLeftDrawer = () => {
       show-if-above
     >
       <q-list>
-        <q-item-label header> Essential Links </q-item-label>
+        <q-item-label header>Essential Links</q-item-label>
 
         <EssentialLink
           v-for="link in linksList"

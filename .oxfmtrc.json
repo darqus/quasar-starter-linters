@@ -1,0 +1,73 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "bracketSameLine": false,
+  "singleAttributePerLine": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "vueIndentScriptAndStyle": false,
+  "sortPackageJson": false,
+  "ignorePatterns": [
+    "dist/**",
+    ".quasar/**",
+    "plan/**",
+    "src/css/_tokens.scss",
+    "package-lock.json",
+    "**/*.min.*"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.css", "**/*.scss"],
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ],
+  "sortImports": {
+    "internalPattern": ["@/"],
+    "ignoreCase": true,
+    "newlinesBetween": true,
+    "order": "asc",
+    "customGroups": [
+      {
+        "groupName": "framework-vue",
+        "elementNamePattern": ["vue", "@vue/**"]
+      },
+      {
+        "groupName": "framework-quasar",
+        "elementNamePattern": [
+          "quasar",
+          "@quasar/**",
+          "pinia",
+          "#q-app",
+          "#q-app/**"
+        ]
+      }
+    ],
+    "groups": [
+      ["value-builtin", "type-builtin"],
+      "framework-vue",
+      ["value-external", "type-external"],
+      "framework-quasar",
+      ["value-internal", "type-internal"],
+      ["value-subpath", "type-subpath"],
+      [
+        "value-parent",
+        "type-parent",
+        "value-sibling",
+        "type-sibling",
+        "value-index",
+        "type-index"
+      ],
+      "side_effect_style",
+      "side_effect",
+      "unknown"
+    ]
+  }
+}

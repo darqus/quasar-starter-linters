@@ -1,6 +1,5 @@
+import { defineStore } from '#q-app'
 import { createPinia } from 'pinia'
-
-import { defineStore } from '#q-app/wrappers'
 
 /*
  * When adding new properties to stores, you should also
@@ -8,7 +7,6 @@ import { defineStore } from '#q-app/wrappers'
  * @see https://pinia.vuejs.org/core-concepts/plugins.html#typing-new-store-properties
  */
 /* declare module 'pinia' {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type, @typescript-eslint/no-empty-interface, @typescript-eslint/naming-convention
   export interface PiniaCustomProperties {
 
     // add your custom properties here, if any

@@ -1,9 +1,10 @@
-import { defineBoot } from '#q-app/wrappers'
+import axios, { create, type AxiosInstance } from 'axios'
 
-import axios, { type AxiosInstance } from 'axios'
+import { defineBoot } from '#q-app'
 
 declare module 'vue' {
-  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  // Augmentation must be an interface: type aliases cannot be merged.
+  // oxlint-disable-next-line typescript/consistent-type-definitions
   interface ComponentCustomProperties {
     $axios: AxiosInstance
     $api: AxiosInstance
@@ -16,7 +17,7 @@ declare module 'vue' {
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
-const api = axios.create({
+const api = create({
   baseURL: 'https://api.example.com',
 })
 
