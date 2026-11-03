@@ -223,8 +223,9 @@ src/
   `src/env.d.ts`, `.env.example`, `ARCHITECTURE.md`; 404-кнопка перешла на
   именованный маршрут.
 - **CI и docs**: read-only permissions, concurrency, `timeout-minutes`,
-  матрица `22.22.0 / 24 / 26`, `fail-fast: false`; README и STYLE_GUIDE
-  обновлены, план отмечен как выполненный.
+  матрица `22.22.0 / 24 / 26`, `fail-fast: false`, `actions/checkout@v7` и
+  `actions/setup-node@v7`; README и STYLE_GUIDE обновлены, план отмечен как
+  выполненный.
 
 ### Отклонения от первоначальной формулировки
 
