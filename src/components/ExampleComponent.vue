@@ -24,12 +24,13 @@ const todoCount = computed(() => props.todos.length)
 </script>
 
 <template>
-  <div>
+  <div class="example-component">
     <p>{{ title }}</p>
     <ul>
       <li
         v-for="todo in todos"
         :key="todo.id"
+        class="example-component__todo-item"
         @click="increment"
       >
         {{ todo.id }} - {{ todo.content }}

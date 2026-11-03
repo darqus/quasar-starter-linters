@@ -1,0 +1,17 @@
+/**
+ * Example component.
+ *
+ * A small BEM block that demonstrates the conventions of the style system:
+ * one partial per component, a class namespace, and values coming from
+ * design tokens (`--duration-fast`).
+ */
+@layer components {
+  .example-component__todo-item {
+    cursor: pointer;
+    transition: color var(--duration-fast) linear;
+
+    &:hover {
+      color: var(--q-primary);
+    }
+  }
+}

@@ -1,0 +1,12 @@
+/**
+ * Unlayered escape hatch for Quasar component overrides.
+ *
+ * Quasar's own stylesheet is loaded unlayered, and unlayered CSS always
+ * wins over any `@layer`. Rules inside our layers can therefore never
+ * override `.q-btn`, `.q-card`, `.q-field` and friends — such overrides
+ * must live in this file, which is imported last and stays unlayered on
+ * purpose.
+ *
+ * Everything that is *not* a Quasar override belongs in a layered
+ * `_<component>.scss` partial instead.
+ */

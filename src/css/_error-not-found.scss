@@ -1,0 +1,16 @@
+/**
+ * 404 page.
+ *
+ * The fullscreen flex shell stays on Quasar utilities: Quasar's stylesheet
+ * is unlayered, so a `display` declared here would lose to `.flex`. Only
+ * the typography of the children is ours.
+ */
+@layer components {
+  .error-not-found__code {
+    font-size: var(--size-hero);
+  }
+
+  .error-not-found__message {
+    opacity: var(--opacity-muted);
+  }
+}

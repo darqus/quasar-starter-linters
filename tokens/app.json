@@ -1,0 +1,21 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "size": {
+    "hero": {
+      "value": "30vh",
+      "description": "Display size of the 404 page number"
+    }
+  },
+  "opacity": {
+    "muted": {
+      "value": "0.4",
+      "description": "Muted text on the error page"
+    }
+  },
+  "duration": {
+    "fast": {
+      "value": "200ms",
+      "description": "Hover and focus transitions"
+    }
+  }
+}

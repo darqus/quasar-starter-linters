@@ -1,1 +1,15 @@
-// app global css in SCSS form
+/**
+ * Single style entry point.
+ *
+ * Layer order is declared in `_reset.scss`, which must stay the first
+ * loaded partial. This file only lists `@use` — never add rules here, and
+ * never use `@import` (deprecated in Sass).
+ */
+@use "./reset";
+@use "./tokens";
+@use "./error-not-found";
+@use "./example-component";
+
+/* Unlayered on purpose, keep it last: the only place where Quasar's own
+   `.q-*` styles may be overridden (see STYLE_GUIDE.md). */
+@use "./quasar-overrides";

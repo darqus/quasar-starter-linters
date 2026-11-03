@@ -1,0 +1,36 @@
+/**
+ * Cascade layer order — the specificity architecture of this codebase.
+ *
+ * Must stay the first rule of every style entry point (Sass requires
+ * `@use` first, so the statement lives here and entries load this file
+ * first).
+ *
+ * Later layers win over earlier ones regardless of selector specificity:
+ *   reset      — minimal normalization, lowest priority
+ *   tokens     — design token custom properties (:root)
+ *   base       — element defaults for the app shell
+ *   components — BEM component styles
+ *   utilities  — opt-in single-purpose classes, always beat components
+ *
+ * Quasar ships its own stylesheet unlayered, so it always wins over these
+ * layers. Overrides for Quasar's `.q-*` classes therefore live in the
+ * unlayered `_quasar-overrides.scss` (see STYLE_GUIDE.md).
+ */
+@layer reset, tokens, base, components, utilities;
+
+@layer reset {
+  * {
+    &,
+    &::before,
+    &::after {
+      box-sizing: border-box;
+    }
+
+    scrollbar-width: thin;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+}
