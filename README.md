@@ -2,13 +2,15 @@
 
 A Quasar v3 starter whose subject is the tooling, not the demo page: a
 type-aware [Oxlint](https://oxc.rs/) setup, [Oxfmt](https://oxc.rs/)
-formatting, Stylelint with a BEM contract, and two project-specific guards
+formatting, Stylelint with a BEM contract, and three project-specific guards
 that close the gaps Oxlint leaves in Vue templates. Everything runs through a
 single `npm run lint` and is covered by tests.
 
 The application itself is the default Quasar starter (a layout, an example
-page, a 404 page, Pinia and Axios boots). It is small on purpose: the value of
-this repository is the pipeline around it.
+page, a 404 page, a Pinia store and an HTTP service). It is small on purpose:
+the value of this repository is the pipeline and the folder skeleton around
+it. Where a new feature goes is described in
+[`ARCHITECTURE.md`](ARCHITECTURE.md).
 
 ## Requirements
 
@@ -26,18 +28,19 @@ project used by `vue-tsc` and Oxlint.
 
 ## Commands
 
-| Command                   | What it does                                                             |
-| ------------------------- | ------------------------------------------------------------------------ |
-| `npm run dev`             | Quasar dev server with HMR and `vue-tsc` checking                        |
-| `npm run build`           | production SPA build                                                     |
-| `npm run lint`            | Oxlint, Stylelint, Oxfmt check, Vue attribute order, no `<style>` blocks |
-| `npm run fix`             | the same checks with autofix where possible                              |
-| `npm run format`          | Oxfmt only                                                               |
-| `npm run check:vue-attrs` | attribute order check only                                               |
-| `npm run fix:vue-attrs`   | reorder template attributes automatically                                |
-| `npm run typecheck`       | `vue-tsc --noEmit`                                                       |
-| `npm test`                | Vitest: guard scripts and generated-token sync                           |
-| `npm run build:tokens`    | regenerate `src/css/_tokens.scss` from `tokens/app.json`                 |
+| Command                       | What it does                                                      |
+| ----------------------------- | ----------------------------------------------------------------- |
+| `npm run dev`                 | Quasar dev server with HMR and `vue-tsc` checking                 |
+| `npm run build`               | production SPA build                                              |
+| `npm run lint`                | Oxlint, Stylelint, Oxfmt check, Vue attribute order, style guards |
+| `npm run fix`                 | the same checks with autofix where possible                       |
+| `npm run format`              | Oxfmt only                                                        |
+| `npm run check:vue-attrs`     | attribute order check only                                        |
+| `npm run fix:vue-attrs`       | reorder template attributes automatically                         |
+| `npm run check:inline-styles` | static `style="..."` check only                                   |
+| `npm run typecheck`           | `vue-tsc --noEmit`                                                |
+| `npm test`                    | Vitest: guard scripts, style contracts, generated-token sync      |
+| `npm run build:tokens`        | regenerate `src/css/_tokens.scss` from `tokens/app.json`          |
 
 ## Linting pipeline
 
@@ -48,6 +51,7 @@ project used by `vue-tsc` and Oxlint.
 | Formatting          | `oxfmt --check`                                | all supported files             | indentation, quotes, trailing commas, import order      |
 | Template attributes | `scripts/check-vue-attribute-order.mjs`        | `src/**/*.vue`                  | `DEFINITION → … → CONTENT`, alphabetical inside a group |
 | Component styles    | `scripts/check-no-style-blocks.mjs`            | `src/**/*.vue`                  | `<style>` blocks are forbidden                          |
+| Static styles       | `scripts/check-no-inline-styles.mjs`           | `src/**/*.vue`                  | static `style="..."`; `:style` is allowed               |
 | Types               | `vue-tsc --noEmit`                             | `src/**`                        | template and script types                               |
 
 Type-aware rules (`no-floating-promises`, `prefer-readonly`,
@@ -115,11 +119,22 @@ In short:
 - cascade layers `reset → tokens → base → components → utilities`;
 - design tokens in `tokens/app.json`, generated into `src/css/_tokens.scss`;
 - BEM class names enforced by Stylelint;
-- no `<style>` blocks in components;
+- no `<style>` blocks and no static `style="..."` in components;
 - Quasar's unlayered CSS is only overridden in `src/css/_quasar-overrides.scss`.
 
 The repository demonstrates the rules on real code: the 404 page and the
 example component use BEM partials and tokens instead of inline styles.
+`test/styles.spec.mjs` turns the architecture into a contract: `app.scss` may
+contain only `@use`, `_reset.scss` must come first, `_quasar-overrides.scss`
+last, every partial must be referenced, and every regular partial must sit
+inside exactly one of `@layer base`, `@layer components` or
+`@layer utilities`.
+
+## Environment variables
+
+Copy `.env.example` to `.env.local` (git-ignored) and adjust the values.
+`VITE_API_URL` is typed in `src/env.d.ts` and consumed by
+`src/services/api.ts`; without it, requests stay on the current origin.
 
 ## Editor setup
 
@@ -137,7 +152,8 @@ Without the Run On Save extension the `npm run lint` gate still applies, and
 
 ## CI
 
-`.github/workflows/ci.yml` runs on pushes and pull requests:
+`.github/workflows/ci.yml` runs on pushes and pull requests with a
+read-only token and a concurrency group that cancels superseded runs:
 
 1. `npm ci`
 2. `npm run lint`
@@ -145,24 +161,43 @@ Without the Run On Save extension the `npm run lint` gate still applies, and
 4. `npm test`
 5. `npm run build`
 
+The full sequence runs on Node `22.22.0` (the lower bound), `24` and `26`
+(`fail-fast: false`), so the supported minimum and current LTS lines are
+checked rather than only declared.
+
 ## Project structure
 
 ```
 scripts/
-├── build-tokens.mjs              # Style Dictionary → src/css/_tokens.scss
+├── build-tokens.mjs              # CLI: Style Dictionary → src/css/_tokens.scss
 ├── check-no-style-blocks.mjs     # guard: no <style> in SFCs
+├── check-no-inline-styles.mjs    # guard: no static style="..." in SFCs
 ├── check-vue-attribute-order.mjs # guard: template attribute order
 └── lib/                          # pure rule logic + Vitest tests
 tokens/app.json                   # design tokens (DTCG)
 src/css/                          # layered SCSS modules + STYLE_GUIDE.md
+src/services/api.ts               # typed HTTP client (VITE_API_URL)
+src/types/                        # domain and shared types
+src/router/names.ts               # route names (ROUTE_NAME)
 test/tokens.spec.mjs              # generated tokens stay in sync
+test/styles.spec.mjs              # style architecture contract
 .oxlintrc.json                    # Oxlint rules
 .oxfmtrc.json                     # Oxfmt options + import groups
 .stylelintrc.json                 # Stylelint + BEM contract
 ```
 
+The folder map, dependency direction and the recipe for a new feature live
+in [`ARCHITECTURE.md`](ARCHITECTURE.md).
+
+## License
+
+[MIT](LICENSE) © 2026 darqus
+
 ## Changelog
 
+- 2026-11: architecture hardening — `src/types` and `src/services`, named
+  routes, typed `VITE_*` variables, inline-style and style-contract tests, a
+  shared `.vue` collector, CI matrix and `LICENSE`.
 - 2026-11: move from ESLint + Prettier to Oxlint + Oxfmt, upgrade to Quasar v3
   (`@quasar/app-vite` 3), switch the package manager to npm, add the layered
   SCSS system with design tokens, add tests and CI.

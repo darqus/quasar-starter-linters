@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ROUTE_NAME } from '@/router/names'
+</script>
 
 <template>
   <div
@@ -10,11 +12,11 @@
       <div class="error-not-found__message text-h2">Oops. Nothing here...</div>
 
       <q-btn
+        :to="{ name: ROUTE_NAME.HOME }"
         class="q-mt-xl"
         color="white"
         label="Go Home"
         text-color="blue"
-        to="/"
         no-caps
         unelevated
       />

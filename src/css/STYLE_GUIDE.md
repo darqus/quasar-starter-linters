@@ -1,8 +1,10 @@
 # Style guide
 
 Application styles live in SCSS modules under `src/css/`. Vue components
-must not contain `<style>` blocks: `node scripts/check-no-style-blocks.mjs`
-enforces that and is part of `npm run lint`.
+must not contain `<style>` blocks or static `style="..."` attributes:
+`node scripts/check-no-style-blocks.mjs` and
+`node scripts/check-no-inline-styles.mjs` enforce that and are part of
+`npm run lint`.
 
 ## 1. Principles
 
@@ -11,6 +13,9 @@ enforces that and is part of `npm run lint`.
 3. Numbers come from tokens (`var(--duration-fast)`), never hardcoded.
 4. Class names are BEM: `block__element--modifier`, no `!important`.
 5. The entry point `app.scss` contains only `@use` — not a single rule.
+6. Static styling never lives in a template. Dynamic `:style` is allowed:
+   it is the legitimate way to express values that only exist at runtime
+   (cursor position, a user-chosen color).
 
 ## 2. Cascade layers
 
@@ -139,21 +144,36 @@ src/css/
 
 ## 6. Guards and linting
 
-| Tool                                   | What it checks                             |
-| -------------------------------------- | ------------------------------------------ |
-| `stylelint` (`standard-scss` + recess) | property order, BEM pattern, syntax errors |
-| `oxfmt`                                | SCSS formatting (2 spaces, double quotes)  |
-| `check-no-style-blocks.mjs`            | absence of `<style>` in `src/**/*.vue`     |
-| `check-vue-attribute-order.mjs`        | attribute order in Vue templates           |
+| Tool                                   | What it checks                                    |
+| -------------------------------------- | ------------------------------------------------- |
+| `stylelint` (`standard-scss` + recess) | property order, BEM pattern, syntax errors        |
+| `oxfmt`                                | SCSS formatting (2 spaces, double quotes)         |
+| `check-no-style-blocks.mjs`            | absence of `<style>` in `src/**/*.vue`            |
+| `check-no-inline-styles.mjs`           | absence of static `style="..."`; `:style` allowed |
+| `check-vue-attribute-order.mjs`        | attribute order in Vue templates                  |
 
 `npm run lint` runs everything, `npm run fix` applies autofixes. The guard
 scripts have unit tests in `scripts/lib/*.test.mjs`.
+
+`test/styles.spec.mjs` checks the architecture itself:
+
+- `app.scss` contains only `@use` statements (comments are allowed);
+- `./reset` is the first `@use`, `./quasar-overrides` the last;
+- every `@use` points to an existing `_*.scss` partial;
+- every partial in `src/css/` is referenced by `app.scss` (no orphans);
+- every regular partial is wrapped in exactly one of `@layer base`,
+  `@layer components` or `@layer utilities`;
+- `_reset.scss` declares the layer order;
+- `_tokens.scss` is generated, not hand-edited.
+
+A new partial that is not imported, or a rule outside its layer, fails
+`npm test` before it reaches review.
 
 ## 7. Checklist for a new component
 
 1. Partial `src/css/_<component>.scss`, all content inside `@layer components`.
 2. Values are tokens; a non-token value becomes a token in `tokens/app.json`
    plus `npm run build:tokens`.
-3. BEM classes in the template, no `<style>`.
+3. BEM classes in the template, no `<style>`, no static `style="..."`.
 4. Colors use `var(--q-*)`; derived shades use `color-mix()`.
 5. `npm run build:tokens && npm run lint && npm run typecheck && npm test`.

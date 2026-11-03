@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
-import EssentialLink, {
-  type EssentialLinkProps,
-} from '@/components/EssentialLink.vue'
+import EssentialLink from '@/components/EssentialLink.vue'
+import type { EssentialLinkProps } from '@/types/essential-link'
 
 const linksList: EssentialLinkProps[] = [
   {

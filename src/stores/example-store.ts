@@ -1,10 +1,15 @@
 import { computed, ref } from 'vue'
 
-import { defineStore, acceptHMRUpdate, createPinia } from 'pinia'
+import { defineStore, acceptHMRUpdate } from 'pinia'
 
-export const pinia = createPinia()
-
-// Example store using Composition API
+/**
+ * Example composition store.
+ *
+ * Copy this file as the starting point for a real store: `defineStore` with
+ * a setup function, refs for state, computed values for getters and plain
+ * functions for actions. The instance lives in `src/stores/index.ts`; never
+ * create a second `createPinia()` here.
+ */
 export const useCounterStore = defineStore('counter', () => {
   // state
   const count = ref(0)

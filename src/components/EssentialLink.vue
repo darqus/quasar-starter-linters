@@ -1,10 +1,5 @@
 <script setup lang="ts">
-export type EssentialLinkProps = {
-  title: string
-  caption?: string
-  link?: string
-  icon?: string
-}
+import type { EssentialLinkProps } from '@/types/essential-link'
 
 withDefaults(defineProps<EssentialLinkProps>(), {
   caption: '',

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFile, readdir } from 'node:fs/promises'
+import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
 
@@ -15,26 +15,10 @@ import process from 'node:process'
  * Exit code: 1 when a style block is found, 0 when clean.
  */
 import { findStyleBlocks, formatStyleBlock } from './lib/noStyleBlocks.mjs'
+import { collectVueFiles } from './lib/vueFiles.mjs'
 
 const ROOT = path.resolve(import.meta.dirname, '..')
 const DEFAULT_DIRS = [path.join(ROOT, 'src')]
-
-async function collectVueFiles(dir) {
-  const entries = await readdir(dir, { withFileTypes: true })
-  const files = await Promise.all(
-    entries.map(async (entry) => {
-      const entryPath = path.join(dir, entry.name)
-
-      if (entry.isDirectory()) {
-        return entry.name === 'node_modules' ? [] : collectVueFiles(entryPath)
-      }
-
-      return entry.isFile() && entry.name.endsWith('.vue') ? [entryPath] : []
-    }),
-  )
-
-  return files.flat()
-}
 
 const targets = process.argv.slice(2).filter((arg) => !arg.startsWith('-'))
 const dirs =
@@ -43,7 +27,7 @@ const dirs =
 const files = (await Promise.all(dirs.map(collectVueFiles))).flat()
 const violations = []
 
-for (const file of files.sort((a, b) => a.localeCompare(b))) {
+for (const file of files) {
   const source = await readFile(file, 'utf8')
   const blocks = findStyleBlocks(source, file)
 

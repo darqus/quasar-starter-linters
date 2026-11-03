@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process'
 import { existsSync } from 'node:fs'
-import { readFile, readdir, stat, writeFile } from 'node:fs/promises'
+import { readFile, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import process from 'node:process'
-import { fileURLToPath } from 'node:url'
 
 /**
  * Check attribute order in Vue templates and optionally rewrite it.
@@ -25,16 +24,10 @@ import {
   findOrderViolations,
   isBind,
 } from './lib/vueAttributeOrder.mjs'
+import { collectVueFiles } from './lib/vueFiles.mjs'
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
+const ROOT = path.resolve(import.meta.dirname, '..')
 const DEFAULT_PATHS = ['src']
-const SKIP_DIRS = new Set([
-  'node_modules',
-  'dist',
-  'out',
-  'coverage',
-  'resources',
-])
 const isWindows = process.platform === 'win32'
 
 const resolveCommand = (command) => {
@@ -62,27 +55,6 @@ function attributeLabel(prop) {
     return prop.arg ? `#${prop.arg.content}` : 'v-slot'
   }
   return `v-${prop.name}${prop.arg ? `:${prop.arg.content}` : ''}`
-}
-
-async function collectVueFiles(target) {
-  const info = await stat(target)
-  if (info.isFile()) {
-    return target.endsWith('.vue') ? [target] : []
-  }
-
-  const files = []
-  for (const entry of await readdir(target, { withFileTypes: true })) {
-    if (SKIP_DIRS.has(entry.name)) {
-      continue
-    }
-    const full = path.join(target, entry.name)
-    if (entry.isDirectory()) {
-      files.push(...(await collectVueFiles(full)))
-    } else if (entry.name.endsWith('.vue')) {
-      files.push(full)
-    }
-  }
-  return files
 }
 
 /** Analyze one SFC: collect violations and (optionally) rewrite edits. */

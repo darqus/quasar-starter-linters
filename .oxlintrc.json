@@ -75,6 +75,12 @@
         "eslint/no-console": "off",
         "eslint/prefer-destructuring": "off"
       }
+    },
+    {
+      "files": ["**/*.d.ts"],
+      "rules": {
+        "typescript/consistent-type-definitions": "off"
+      }
     }
   ]
 }

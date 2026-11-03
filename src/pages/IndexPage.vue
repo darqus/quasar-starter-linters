@@ -2,7 +2,7 @@
 import { ref } from 'vue'
 
 import ExampleComponent from '@/components/ExampleComponent.vue'
-import type { Todo, Meta } from '@/components/models'
+import type { Meta, Todo } from '@/types/example'
 
 const todos = ref<Todo[]>([
   {
